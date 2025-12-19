@@ -1,0 +1,27 @@
+# Core LangChain & Embeddings
+langchain==0.3.27
+langchain-community==0.3.30
+langchain-core==0.3.76
+langchain-huggingface==0.3.1
+langchain-text-splitters==0.3.11
+
+# Vector Store
+faiss-cpu>=1.8.0
+
+# Transformers for LLM & Scoring
+transformers>=4.46.2
+sentence-transformers>=3.0.1
+
+# Utilities
+numpy>=1.26.4
+pandas>=2.2.3
+pydantic>=2.9.2
+tqdm>=4.66.5
+requests>=2.31.0
+
+# FastAPI & Server
+fastapi>=0.115.2
+uvicorn>=0.30.0
+
+# Optional: Dev Tools
+python-dotenv>=1.0.1

@@ -1,29 +1,30 @@
+# Backend/deps.py
+"""
+FastAPI dependency injection for vectorstore access.
+Uses application lifespan state instead of the thread-unsafe lru_cache pattern.
+During the FAISS → Qdrant migration (Phase 1), this module bridges both.
+"""
+import logging
 from typing import Tuple
-from functools import lru_cache
-import time
-from Backend.retriever import load_vectorstore_and_check, build_or_update_faiss_index
 
-@lru_cache(maxsize=1)
-def get_vectorstore_and_meta() -> Tuple[object, dict]:
+from fastapi import Request
+
+logger = logging.getLogger(__name__)
+
+
+def get_vectorstore_and_meta(request: Request) -> Tuple[object, dict]:
     """
-    Loads and caches the vectorstore + metadata (loaded once per process).
-    Callers should depend on this to get the FAISS vectorstore.
+    Retrieve the vectorstore + metadata from FastAPI app state.
+    The state is populated in the lifespan context manager in api.py.
+    This is thread-safe: app.state is set once at startup, read-only afterwards.
     """
-    vs, meta = load_vectorstore_and_check()
+    vs   = request.app.state.vectorstore
+    meta = request.app.state.vectorstore_meta
+    if vs is None:
+        raise RuntimeError("Vectorstore not initialised — check startup logs.")
     return vs, meta
 
-def reload_vectorstore_and_meta(force_rebuild: bool = False):
-    """
-    Force rebuild (or reload) of FAISS index. Useful for admin endpoint.
-    This invalidates the cached loader by clearing the LRU cache.
-    """
-    # If we want to rebuild indexes from documents:
-    if force_rebuild:
-        # call your existing function to rebuild index; it writes index files to disk
-        build_or_update_faiss_index(force_rebuild=True)
 
-    # clear cache and re-load
-    get_vectorstore_and_meta.cache_clear()
-    # warm the cache
-    vs_meta = get_vectorstore_and_meta()
-    return vs_meta
+def get_vectorstore_only(request: Request) -> object:
+    """Shortcut for endpoints that only need the vectorstore."""
+    return get_vectorstore_and_meta(request)[0]

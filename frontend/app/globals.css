@@ -1,0 +1,165 @@
+/* ============================================================
+   globals.css — RAG Chatbot Design System
+   Dark glassmorphism theme with animated accents
+   ============================================================ */
+
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap');
+
+/* ── CSS Variables ─────────────────────────────────────────── */
+:root {
+  /* Colors */
+  --bg-base:       #0a0d14;
+  --bg-surface:    #111827;
+  --bg-elevated:   #1a2235;
+  --bg-glass:      rgba(26, 34, 53, 0.6);
+  --bg-glass-hover: rgba(26, 34, 53, 0.85);
+
+  --accent-primary:  #6366f1;   /* indigo */
+  --accent-secondary: #8b5cf6;  /* violet */
+  --accent-glow:     rgba(99, 102, 241, 0.35);
+  --accent-cyan:     #22d3ee;
+
+  --text-primary:    #f0f4ff;
+  --text-secondary:  #94a3b8;
+  --text-muted:      #4b5563;
+  --text-accent:     #818cf8;
+
+  --border-subtle:   rgba(99, 102, 241, 0.12);
+  --border-active:   rgba(99, 102, 241, 0.5);
+  --border-glass:    rgba(255, 255, 255, 0.06);
+
+  --success: #10b981;
+  --warning: #f59e0b;
+  --error:   #ef4444;
+
+  /* Spacing */
+  --radius-sm:  6px;
+  --radius-md:  12px;
+  --radius-lg:  18px;
+  --radius-xl:  24px;
+
+  /* Shadows */
+  --shadow-glass:  0 8px 32px rgba(0, 0, 0, 0.4), 0 1px 0 rgba(255,255,255,0.05) inset;
+  --shadow-glow:   0 0 40px var(--accent-glow);
+  --shadow-card:   0 4px 24px rgba(0, 0, 0, 0.3);
+}
+
+/* ── Reset ─────────────────────────────────────────────────── */
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+html { height: 100%; scroll-behavior: smooth; }
+
+body {
+  font-family: 'Inter', system-ui, sans-serif;
+  background: var(--bg-base);
+  color: var(--text-primary);
+  min-height: 100vh;
+  line-height: 1.6;
+  -webkit-font-smoothing: antialiased;
+
+  /* Animated grid background */
+  background-image:
+    radial-gradient(ellipse 80% 50% at 50% -20%, rgba(99,102,241,0.15), transparent),
+    linear-gradient(rgba(99,102,241,0.03) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(99,102,241,0.03) 1px, transparent 1px);
+  background-size: 100% 100%, 40px 40px, 40px 40px;
+}
+
+/* ── Scrollbar ─────────────────────────────────────────────── */
+::-webkit-scrollbar { width: 6px; }
+::-webkit-scrollbar-track { background: var(--bg-surface); }
+::-webkit-scrollbar-thumb { background: var(--accent-primary); border-radius: 3px; }
+::-webkit-scrollbar-thumb:hover { background: var(--accent-secondary); }
+
+/* ── Animations ────────────────────────────────────────────── */
+@keyframes fadeSlideUp {
+  from { opacity: 0; transform: translateY(16px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to   { opacity: 1; }
+}
+@keyframes pulse-glow {
+  0%, 100% { box-shadow: 0 0 0 0 var(--accent-glow); }
+  50%       { box-shadow: 0 0 20px 4px var(--accent-glow); }
+}
+@keyframes shimmer {
+  0%   { background-position: -200% center; }
+  100% { background-position:  200% center; }
+}
+@keyframes blink {
+  0%, 100% { opacity: 1; }
+  50%       { opacity: 0; }
+}
+@keyframes spin {
+  to { transform: rotate(360deg); }
+}
+@keyframes slideIn {
+  from { opacity: 0; transform: translateX(-10px); }
+  to   { opacity: 1; transform: translateX(0); }
+}
+
+/* ── Glass card ────────────────────────────────────────────── */
+.glass {
+  background: var(--bg-glass);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  border: 1px solid var(--border-glass);
+  box-shadow: var(--shadow-glass);
+  border-radius: var(--radius-lg);
+}
+
+/* ── Typing cursor ─────────────────────────────────────────── */
+.typing-cursor::after {
+  content: '▋';
+  animation: blink 0.9s step-end infinite;
+  color: var(--accent-primary);
+  margin-left: 2px;
+}
+
+/* ── Spinner ───────────────────────────────────────────────── */
+.spinner {
+  width: 18px; height: 18px;
+  border: 2px solid var(--border-subtle);
+  border-top-color: var(--accent-primary);
+  border-radius: 50%;
+  animation: spin 0.7s linear infinite;
+}
+
+/* ── Skeleton shimmer ──────────────────────────────────────── */
+.skeleton {
+  background: linear-gradient(
+    90deg,
+    var(--bg-elevated) 25%,
+    rgba(99,102,241,0.1) 50%,
+    var(--bg-elevated) 75%
+  );
+  background-size: 200% auto;
+  animation: shimmer 1.4s linear infinite;
+  border-radius: var(--radius-sm);
+}
+
+/* ── Code blocks inside answers ───────────────────────────── */
+.answer-content code {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 0.82em;
+  background: rgba(99,102,241,0.12);
+  padding: 1px 6px;
+  border-radius: 4px;
+  color: var(--accent-cyan);
+}
+.answer-content pre {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 0.82em;
+  background: rgba(0,0,0,0.4);
+  border: 1px solid var(--border-subtle);
+  border-radius: var(--radius-md);
+  padding: 14px 16px;
+  overflow-x: auto;
+  margin: 10px 0;
+}
+.answer-content p  { margin-bottom: 10px; }
+.answer-content ul, .answer-content ol { padding-left: 20px; margin-bottom: 10px; }
+.answer-content li { margin-bottom: 4px; }
+.answer-content strong { color: var(--text-primary); font-weight: 600; }

@@ -3,15 +3,22 @@ __pycache__/
 *.pyc
 *.pyo
 *.pyd
+*.pyd
 venv/
 env/
 .venv/
+*.egg-info/
+dist/
+build/
 
-# Environment variables
+# Environment variables — NEVER commit real keys
 .env
 
 # IDE
 .vscode/
+.idea/
+*.swp
+*.swo
 
 # Logs & outputs
 *.log
@@ -21,9 +28,30 @@ results/
 # Jupyter
 .ipynb_checkpoints/
 
-# Vector databases
+# Vector databases & indexes
 faiss_index/
 chroma_db/
+Backend/faiss_index/
+Backend/faiss_verify_cache/
+qdrant_storage/
+
+# Pickle / binary cache files
+*.pkl
+*.pickle
+
+# Docker volumes
+qdrant_data/
+redis_data/
+
+# Test artifacts
+.pytest_cache/
+.coverage
+htmlcov/
+
+# Frontend build
+frontend/.next/
+frontend/node_modules/
+frontend/out/
 
 # OS files
 .DS_Store

@@ -1,0 +1,155 @@
+/* app/page.module.css */
+
+/* ── Root layout ─────────────────────────────────────────────── */
+.layout {
+  display: flex;
+  height: 100vh;
+  overflow: hidden;
+}
+
+/* ── Sidebar ─────────────────────────────────────────────────── */
+.sidebar {
+  width: 260px;
+  flex-shrink: 0;
+  background: var(--bg-glass);
+  backdrop-filter: blur(24px);
+  border-right: 1px solid var(--border-glass);
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  padding: 24px 18px;
+  overflow-y: auto;
+}
+
+/* Logo */
+.logoBlock {
+  display: flex; align-items: center; gap: 12px;
+  padding-bottom: 16px;
+  border-bottom: 1px solid var(--border-subtle);
+}
+.logoIcon {
+  width: 42px; height: 42px;
+  background: linear-gradient(135deg, var(--accent-primary), var(--accent-secondary));
+  border-radius: var(--radius-md);
+  display: flex; align-items: center; justify-content: center;
+  font-size: 1.3rem;
+  box-shadow: 0 4px 16px var(--accent-glow);
+}
+.logoText  { font-size: 1.1rem; font-weight: 700; color: var(--text-primary); }
+.logoSub   { font-size: 0.72rem; color: var(--text-muted); }
+
+/* Status */
+.statusRow {
+  display: flex; align-items: center; gap: 8px;
+}
+.statusDot {
+  width: 8px; height: 8px; border-radius: 50%;
+  flex-shrink: 0;
+}
+.statusDot_ok    { background: var(--success); box-shadow: 0 0 6px var(--success); }
+.statusDot_error { background: var(--error);   box-shadow: 0 0 6px var(--error); }
+.statusDot_idle  { background: var(--warning); animation: pulse-glow 2s infinite; }
+.statusLabel { font-size: 0.8rem; color: var(--text-secondary); }
+
+/* Model card */
+.modelCard, .sessionCard {
+  background: var(--bg-elevated);
+  border: 1px solid var(--border-subtle);
+  border-radius: var(--radius-md);
+  padding: 10px 12px;
+  display: flex; flex-direction: column; gap: 3px;
+}
+.modelLabel, .sessionLabel {
+  font-size: 0.7rem;
+  color: var(--text-muted);
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+.modelName {
+  font-size: 0.8rem;
+  color: var(--text-accent);
+  font-family: 'JetBrains Mono', monospace;
+  word-break: break-all;
+}
+.sessionId {
+  font-size: 0.78rem;
+  color: var(--accent-cyan);
+  font-family: 'JetBrains Mono', monospace;
+}
+
+/* Capabilities list */
+.capsList {
+  display: flex; flex-direction: column; gap: 8px;
+}
+.capsTitle {
+  font-size: 0.72rem;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: var(--text-muted);
+  margin-bottom: 4px;
+}
+.capItem {
+  display: flex; align-items: center; gap: 10px;
+  font-size: 0.82rem;
+  color: var(--text-secondary);
+  animation: slideIn 0.3s ease;
+}
+.capItem span:first-child { font-size: 1rem; }
+
+/* Clear btn */
+.clearBtn {
+  margin-top: auto;
+  background: rgba(239,68,68,0.08);
+  border: 1px solid rgba(239,68,68,0.2);
+  border-radius: var(--radius-md);
+  color: #fca5a5;
+  padding: 9px 14px;
+  font-size: 0.82rem;
+  cursor: pointer;
+  font-family: inherit;
+  transition: all 0.2s;
+  text-align: left;
+}
+.clearBtn:hover {
+  background: rgba(239,68,68,0.15);
+  border-color: rgba(239,68,68,0.4);
+}
+
+/* ── Main chat area ───────────────────────────────────────────── */
+.main {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+}
+
+/* Header */
+.header {
+  display: flex; align-items: center; justify-content: space-between;
+  padding: 16px 24px;
+  border-bottom: 1px solid var(--border-subtle);
+  background: rgba(10,13,20,0.4);
+  backdrop-filter: blur(10px);
+  flex-shrink: 0;
+}
+.headerLeft { display: flex; align-items: baseline; gap: 12px; }
+.headerTitle {
+  font-size: 1rem; font-weight: 600; color: var(--text-primary);
+}
+.headerSub { font-size: 0.78rem; color: var(--text-muted); }
+
+.thinkingBadge {
+  display: flex; align-items: center; gap: 8px;
+  background: rgba(99,102,241,0.1);
+  border: 1px solid var(--border-active);
+  border-radius: 20px;
+  padding: 5px 12px;
+  font-size: 0.8rem;
+  color: var(--text-accent);
+  animation: fadeIn 0.3s ease;
+}
+
+/* ── Responsive ──────────────────────────────────────────────── */
+@media (max-width: 640px) {
+  .sidebar { display: none; }
+}

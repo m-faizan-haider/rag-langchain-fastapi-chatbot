@@ -1,0 +1,14 @@
+[
+  {
+    "question": "What is cloud computing?",
+    "ground_truth": "Cloud computing is the on-demand delivery of computing resources such as servers, storage, databases, networking, software, and analytics over the internet with pay-as-you-go pricing."
+  },
+  {
+    "question": "What are the main benefits of cloud computing?",
+    "ground_truth": "The main benefits include cost savings, scalability, flexibility, reliability, security, and faster innovation."
+  },
+  {
+    "question": "What is the difference between IaaS, PaaS, and SaaS?",
+    "ground_truth": "IaaS provides virtualized computing infrastructure, PaaS provides a platform for developing and deploying applications, and SaaS provides software applications over the internet."
+  }
+]
